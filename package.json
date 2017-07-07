@@ -5,7 +5,8 @@
   "repository": "git@github.com:jeantimex/react-webpack-code-splitting.git",
   "license": "MIT",
   "scripts": {
-    "start": "node webpack/webpack-dev-server"
+    "start": "NODE_ENV=development node webpack/webpack-dev-server --env.dev",
+    "build": "rm -Rf build/* | NODE_ENV=production webpack --config webpack/webpack.config.js --progress --env.prod"
   },
   "dependencies": {
     "react": "^15.6.1",
