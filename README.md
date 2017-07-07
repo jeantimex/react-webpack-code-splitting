@@ -1,2 +1,3 @@
-# react-webpack-code-splitting
-A demo of how to split the code for a React Webpack application.
+# How to Code Splitting with React Router and Webpack 2
+
+![rocket](docs/images/cover.png)<br />
