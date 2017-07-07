@@ -31,7 +31,7 @@ export default {
   component: Core,
   indexRoute: { // but we also want our indexRoute to load <Home />
     getComponent(location, cb) {
-      System.import('./components/Home')
+      System.import('./components/Home' /* webpackChunkName:'home' */)
         .then(loadRoute(cb))
         .catch(errorLoading);
     },
@@ -40,7 +40,7 @@ export default {
     {
       path: 'about', // '/about' loads <Core /> with <About /> passed as a child
       getComponent(location, cb) {
-        System.import('./components/About')
+        System.import('./components/About' /* webpackChunkName:'about' */)
           .then(loadRoute(cb, false))
           .catch(errorLoading);
       },
@@ -48,7 +48,7 @@ export default {
     {
       path: 'users', // '/users' loads <Core /> with <Users /> passed as a child
       getComponent(location, cb) {
-        System.import('./components/Users')
+        System.import('./components/Users' /* webpackChunkName:'users' */)
           .then(loadRoute(cb))
           .catch(errorLoading);
       },
@@ -56,7 +56,7 @@ export default {
     {
       path: '*', // fallback to <Home /> if the route isn't found
       getComponent(location, cb) {
-        System.import('./components/Home')
+        System.import('./components/Home' /* webpackChunkName:'home' */)
           .then(loadRoute(cb))
           .catch(errorLoading);
       },

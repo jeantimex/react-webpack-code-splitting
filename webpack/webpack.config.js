@@ -26,6 +26,7 @@ module.exports = env => {
      */
     output: {
       filename: '[name].[hash].js',
+      chunkFilename: '[name].[chunkhash].chunk.js',
       path: path.join(__dirname, '../build/'),
     },
 
