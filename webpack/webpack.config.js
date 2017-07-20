@@ -11,7 +11,6 @@ module.exports = env => {
   return {
     /**
      * entry tells webpack where to start looking.
-     * In this case we have both an app and vendor file.
      */
     entry: {
       app: path.join(__dirname, '../src/'),
@@ -45,8 +44,21 @@ module.exports = env => {
     plugins: removeEmpty([
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
-        minChunks: Infinity,
         filename: '[name].[hash].js',
+        minChunks: 'Infinity',
+        /* minChunks: (module, count) => {
+            const context = module.context;
+            return context && context.indexOf('node_modules') >= 0;
+        }, */
+      }),
+
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'app',
+        async: 'lodash',
+        minChunks(module, count) {
+            var context = module.context;
+            return context && context.indexOf('node_modules/lodash') >= 0;
+        },
       }),
 
       /**
