@@ -41,7 +41,7 @@ export default {
       path: 'about', // '/about' loads <Core /> with <About /> passed as a child
       getComponent(location, cb) {
         import('./components/About' /* webpackChunkName:'about' */)
-          .then(loadRoute(cb, false))
+          .then(loadRoute(cb))
           .catch(errorLoading);
       },
     },
