@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // Okay, this may be confusing at first glance but go through it step-by-step
 module.exports = env => {
@@ -71,6 +72,9 @@ module.exports = env => {
         },
         sourceMap: false,
       })),
+
+      // Only running webpack analyzer plugin in production
+      ifProd(new BundleAnalyzerPlugin()),
     ]),
   };
 };
