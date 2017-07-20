@@ -36,10 +36,7 @@ module.exports = env => {
         {
           test: /\.(js)$/, // look for .js files
           exclude: /node_modules/, // ingore /node_modules
-          loader: 'babel-loader', // preprocess with that babel goodness
-          query: {
-            cacheDirectory: true,
-          },
+          loader: 'babel-loader' // preprocess with that babel goodness
         },
       ],
     },
