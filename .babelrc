@@ -1,3 +1,11 @@
 {
-  "presets": ["latest", "react"]
+  "presets": [
+    ["latest", {
+      "es2015": {
+        "modules": false
+      }
+    }],
+    "react"
+  ],
+  "plugins": ["syntax-dynamic-import"]
 }
