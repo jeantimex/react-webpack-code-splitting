@@ -44,21 +44,25 @@ module.exports = env => {
     plugins: removeEmpty([
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
-        filename: '[name].[hash].js',
-        minChunks: 'Infinity',
-        /* minChunks: (module, count) => {
-            const context = module.context;
-            return context && context.indexOf('node_modules') >= 0;
-        }, */
+        filename: '[name].[chunkhash].js',
+        //minChunks: 'Infinity',
+        minChunks: (module, count) => {
+          const context = module.context;
+          return context && context.indexOf('node_modules') >= 0;
+        },
       }),
 
       new webpack.optimize.CommonsChunkPlugin({
         name: 'app',
         async: 'lodash',
         minChunks(module, count) {
-            var context = module.context;
-            return context && context.indexOf('node_modules/lodash') >= 0;
+          var context = module.context;
+          return context && context.indexOf('node_modules/lodash') >= 0;
         },
+      }),
+
+      new webpack.optimize.CommonsChunkPlugin({
+        name: ['runtime'],
       }),
 
       /**
