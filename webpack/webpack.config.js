@@ -25,7 +25,7 @@ module.exports = env => {
      *   the root of this prject.
      */
     output: {
-      filename: '[name].[hash].js',
+      filename: '[name].[chunkhash].js',
       chunkFilename: '[name].[chunkhash].chunk.js',
       path: path.join(__dirname, '../build/'),
     },
@@ -43,27 +43,21 @@ module.exports = env => {
 
     plugins: removeEmpty([
       new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: '[name].[chunkhash].js',
-        //minChunks: 'Infinity',
-        minChunks: (module, count) => {
-          const context = module.context;
-          return context && context.indexOf('node_modules') >= 0;
-        },
+        name: ['vendor', 'manifest'],
+        minChunks: Infinity,
       }),
 
       new webpack.optimize.CommonsChunkPlugin({
         name: 'app',
         async: 'lodash',
-        minChunks(module, count) {
+        children: true,
+        minChunks: (module, count) => {
           var context = module.context;
-          return context && context.indexOf('node_modules/lodash') >= 0;
+          return context && context.indexOf('node_modules/lodash') !== -1;
         },
       }),
 
-      new webpack.optimize.CommonsChunkPlugin({
-        name: ['runtime'],
-      }),
+      new webpack.HashedModuleIdsPlugin(),
 
       /**
       * HtmlWebpackPlugin will make sure out JavaScriot files are being called

@@ -1,6 +1,6 @@
 import React from 'react';
-import Router from 'react-router/lib/Router';
-import browserHistory from 'react-router/lib/browserHistory';
+import Router from 'react-router/es/Router';
+import browserHistory from 'react-router/es/browserHistory';
 import routes from './routes'; // importing the routes we just created in /src/routes.js!
 
 /**
